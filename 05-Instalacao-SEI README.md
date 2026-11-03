@@ -152,8 +152,8 @@ Importar os bancos de referencia
     UPDATE sip.orgao SET sigla='LAB', descricao='Laboratorio SEI' WHERE id_orgao=0;
     UPDATE sei.orgao SET sigla='LAB', descricao='Laboratorio SEI' WHERE id_orgao=0;
     
-    UPDATE sip.sistema SET pagina_inicial='http:// ec2-3-92-184-201.compute-1.amazonaws.com/sip' WHERE sigla='SIP';
-    UPDATE sip.sistema SET pagina_inicial='http:// ec2-3-92-184-201.compute-1.amazonaws.com/sei/inicializar.php', web_service='http:// ec2-3-92-184-201.compute-1.amazonaws.com/sei/controlador_ws.php?servico=sip' WHERE sigla='SEI';
+    UPDATE sip.sistema SET pagina_inicial='http:// <ENDERECO_DA_EC2>/sip' WHERE sigla='SIP';
+    UPDATE sip.sistema SET pagina_inicial='http:// <ENDERECO_DA_EC2>/sei/inicializar.php', web_service='http:// <ENDERECO_DA_EC2>/sei/controlador_ws.php?servico=sip' WHERE sigla='SEI';
     
     EXIT;
 
@@ -168,10 +168,10 @@ Editar o sip:
     sudo vim /opt/sip/config/ConfiguracaoSip.php
     Copiar:
     
-    'URL' => 'http:// ec2-3-92-184-201.compute-1.amazonaws.com/sip',
+    'URL' => 'http:// <ENDERECO_DA_EC2>/sip',
     'SiglaOrgaoSistema' => 'LAB',
-    'PaginaLogin' => 'http:// ec2-3-92-184-201.compute-1.amazonaws.com/sip/login.php',
-    'SipWsdl' => 'http:// ec2-3-92-184-201.compute-1.amazonaws.com/sip/controlador_ws.php?servico=sip',
+    'PaginaLogin' => 'http:// <ENDERECO_DA_EC2>/sip/login.php',
+    'SipWsdl' => 'http:// <ENDERECO_DA_EC2>/sip/controlador_ws.php?servico=sip',
     'https' => false,
     
      BancoSip:
@@ -194,11 +194,11 @@ Editar o sei:
 
       sudo vim /opt/sei/config/ConfiguracaoSEI.php
           
-    'URL' => 'http:// ec2-3-92-184-201.compute-1.amazonaws.com/sei',
+    'URL' => 'http:// <ENDERECO_DA_EC2>/sei',
     'RepositorioArquivos' => '/opt/sei/dados',
     'SiglaOrgaoSistema' => 'LAB',
-    'PaginaLogin' => 'http:// ec2-3-92-184-201.compute-1.amazonaws.com/sip/login.php',
-    'SipWsdl' => 'http:// ec2-3-92-184-201.compute-1.amazonaws.com/sip/controlador_ws.php?servico=sip',
+    'PaginaLogin' => 'http:// <ENDERECO_DA_EC2>/sip/login.php',
+    'SipWsdl' => 'http:// <ENDERECO_DA_EC2>/sip/controlador_ws.php?servico=sip',
     'https' => false,
     
      BancoSEI:
@@ -309,8 +309,8 @@ Reiniciar os serviços:
 Etapa 10: Validação
 
   Abrir o navegador e acessar as URLs:
-    SIP: http:// ec2-3-92-184-201.compute-1.amazonaws.com/sip
-    SEI: httpec2-3-92-184-201.compute-1.amazonaws.com/sei
+    SIP: http:// <ENDERECO_DA_EC2>/sip
+    SEI: http:// <ENDERECO_DA_EC2>/sei
 
 Faça o login com os dados padrão:
   Usuário: teste
