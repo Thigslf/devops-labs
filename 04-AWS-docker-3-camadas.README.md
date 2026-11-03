@@ -87,7 +87,7 @@ O objetivo principal do laboratório é disponibilizar uma interface web via Ngi
 
 -> Realizado a validação 
     
-    . Após executar os comandos da build foi aberto o navegador pelo link: http://ec2-44-204-154-9.compute-1.amazonaws.com/
+    . Após executar os comandos da build foi aberto o navegador pelo link: http://<ENDERECO_DA_EC2>
 
   <img width="886" height="243" alt="image" src="https://github.com/user-attachments/assets/852ccf05-0af7-4d83-9f60-02dde8b2e170" />
 
