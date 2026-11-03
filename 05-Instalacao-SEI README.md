@@ -179,7 +179,7 @@ Editar o sip:
     'Porta' => '3306',
     'Banco' => 'sip',
     'Usuario' => 'sei_user',
-    'Senha' => 'sei_user_pass',
+    'Senha' => '<SENHA_DO_BANCO>',
     'Tipo' => 'MySql',
     CacheSip:
     'Servidor' => '127.0.0.1',
