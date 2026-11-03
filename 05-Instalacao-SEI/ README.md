@@ -128,8 +128,8 @@ Configurar o mysql:
     CREATE DATABASE IF NOT EXISTS sip CHARACTER SET latin1 COLLATE latin1_swedish_ci;
     CREATE DATABASE IF NOT EXISTS sei CHARACTER SET latin1 COLLATE latin1_swedish_ci;
     
-    CREATE USER IF NOT EXISTS 'sei_user'@'localhost' IDENTIFIED WITH mysql_native_password BY 'teste';
-    CREATE USER IF NOT EXISTS 'sei_user'@'127.0.0.1' IDENTIFIED WITH mysql_native_password BY 'teste';
+    CREATE USER IF NOT EXISTS 'sei_user'@'localhost' IDENTIFIED WITH mysql_native_password BY '<SENHA_DO_BANCO>';
+    CREATE USER IF NOT EXISTS 'sei_user'@'127.0.0.1' IDENTIFIED WITH mysql_native_password BY '<SENHA_DO_BANCO>';
     GRANT ALL PRIVILEGES ON sei.* TO 'sei_user'@'localhost', 'sei_user'@'127.0.0.1';
     GRANT ALL PRIVILEGES ON sip.* TO 'sei_user'@'localhost', 'sei_user'@'127.0.0.1';
     FLUSH PRIVILEGES;
@@ -205,8 +205,8 @@ Editar o sei:
     'Servidor' => '127.0.0.1',
     'Porta' => '3306',
     'Banco' => 'sei',
-    'Usuario' => 'teste',
-    'Senha' => 'teste',
+    'Usuario' => '<SENHA_DO_BANCO>',
+    'Senha' => '<SENHA_DO_BANCO>',
     'Tipo' => 'MySql',
     
     No bloco CacheSEI:
@@ -314,5 +314,5 @@ Etapa 10: Validação
 
 Faça o login com os dados padrão:
   Usuário: teste
-  Senha: teste
+  Senha: <SENHA_DO_BANCO>
   Órgão: LAB
