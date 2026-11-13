@@ -805,3 +805,10 @@ ETAPA 12 - PDF
 
 <img width="334" height="71" alt="image" src="https://github.com/user-attachments/assets/20e87095-93cd-4b88-b161-2da99add9ba4" />
 
+---
+
+URL
+
+SEI: http://127.0.0.1/sip/login.php?sigla_orgao_sistema=ABC&sigla_sistema=SEI
+SIP: http://127.0.0.1/sip/login.php?sigla_orgao_sistema=ABC&sigla_sistema=SIP
+---
