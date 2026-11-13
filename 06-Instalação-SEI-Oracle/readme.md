@@ -713,3 +713,95 @@ O que foi editado:
 - Testar a resposta HTTP do Solr via hostname local forçando IPv6 - comando: curl -6 -I http://localhost:8983/solr/
 
 <img width="514" height="62" alt="image" src="https://github.com/user-attachments/assets/fe7f77a7-deb7-4626-9e45-d3b66290d49e" />
+
+- Localizar a referência do Solr no arquivo do SEI - comando: sudo grep -n "8983" /opt/sei/config/ConfiguracaoSEI.php
+
+<img width="605" height="42" alt="image" src="https://github.com/user-attachments/assets/fcbfb4de-df06-4fa6-8942-1d0cfd394795" />
+
+- Validar a sintaxe PHP do arquivo do SEI - comando: sudo php -l /opt/sei/config/ConfiguracaoSEI.php
+
+<img width="556" height="41" alt="image" src="https://github.com/user-attachments/assets/ce6bf9f9-a1c6-4d59-a4a5-4b4d8c948fc0" />
+
+
+-> Indexar
+
+- Executar a indexação completa de protocolos do SEI - comando: sudo /usr/bin/php -c /etc/php.ini /opt/sei/scripts/indexacao_protocolos_completa.php
+
+<img width="868" height="100" alt="image" src="https://github.com/user-attachments/assets/7a738c70-6227-4807-b875-8cc05b0fd645" />
+
+- Executar a indexação de publicações do SEI - comando: sudo /usr/bin/php -c /etc/php.ini /opt/sei/scripts/indexacao_publicacoes.php
+
+  <img width="783" height="96" alt="image" src="https://github.com/user-attachments/assets/4a58e1a9-6517-4768-be87-0ea5f15c53b4" />
+
+- Executar a indexação das bases de conhecimento do SEI - comando: sudo /usr/bin/php -c /etc/php.ini /opt/sei/scripts/indexacao_bases_conhecimento.php
+
+<img width="830" height="94" alt="image" src="https://github.com/user-attachments/assets/e2b695f6-5a51-4b49-9061-07ecbba31618" />
+
+- Verificar o status e número de documentos do core de protocolos no Solr - comando: curl -s "http://127.0.0.1:8983/solr/admin/cores?action=STATUS&core=sei-protocolos" | grep numDocs
+
+<img width="956" height="38" alt="image" src="https://github.com/user-attachments/assets/593e7594-a069-4623-87bb-869b073d0d4f" />
+
+---
+
+ETAPA 11 - Agendamentos
+
+---
+
+- Consultar os parâmetros de e-mail do SIP no banco de dados - comando: mysql -u root -p sip -e "SELECT nome, valor FROM infra_parametro WHERE nome LIKE 'SIP_EMAIL%';"
+
+<img width="937" height="117" alt="image" src="https://github.com/user-attachments/assets/477f218c-2b21-4bd3-8dfe-9457ce5b500f" />
+
+- Consultar os parâmetros de e-mail do SEI no banco de dados - comando: mysql -u root -p sei -e "SELECT nome, valor FROM infra_parametro WHERE nome LIKE 'SEI_EMAIL%';"
+
+<img width="941" height="144" alt="image" src="https://github.com/user-attachments/assets/0c6a4494-d1b7-4587-bfd8-8bb223070cf4" />
+
+-> Agendar sem cron
+
+- Criar o arquivo de agendamentos automáticos (cron) do SEI e do SIP - comando: sudo vim /etc/cron.d/sei-agendamentos
+
+<img width="479" height="25" alt="image" src="https://github.com/user-attachments/assets/dc47e2c3-a07f-415a-a93c-24df84959274" />
+ 
+<img width="1038" height="115" alt="image" src="https://github.com/user-attachments/assets/64538ed1-00bf-4077-91f5-c49b843dbb39" />
+
+- Exibir o conteúdo do arquivo de agendamentos do SEI e do SIP - comando: cat /etc/cron.d/sei-agendamentos
+- Verificar as permissões e detalhes do arquivo de agendamentos do SEI e do SIP - comando: ls -l /etc/cron.d/sei-agendamentos
+- Verificar se o serviço do Cron está em execução (ativo) - comando: systemctl is-active crond
+- Verificar se o serviço do Cron está habilitado para iniciar com o sistema - comando: systemctl is-enabled crond
+
+<img width="1019" height="158" alt="image" src="https://github.com/user-attachments/assets/5402f3df-a9d5-47e6-9dd9-d691e0659b76" />
+
+- Executar script de agendamento de tarefas do SEI - comando: sudo /usr/bin/php -c /etc/php.ini /opt/sei/scripts/AgendamentoTarefaSEI.php
+- Executar script de agendamento de tarefas do SIP - comando: sudo /usr/bin/php -c /etc/php.ini /opt/sip/scripts/AgendamentoTarefaSip.php
+
+- Verificar os registros recentes de execução dos agendamentos no log do cron - comando: sudo grep AgendamentoTarefa /var/log/cron | tail -5
+
+<img width="1340" height="109" alt="image" src="https://github.com/user-attachments/assets/b7595c8b-72dc-4e1d-a4bb-d71b2dd9d2b9" />
+
+
+---
+
+ETAPA 12 - PDF
+
+---
+
+- Verificar o caminho de instalação do binário wkhtmltopdf - comando: which wkhtmltopdf
+
+<img width="1153" height="38" alt="image" src="https://github.com/user-attachments/assets/fdd37491-387d-4d61-9c06-8aaf4846620e" />
+
+- Verificar os cabeçalhos de resposta HTTP para o download do pacote RPM do wkhtmltopdf - comando: curl -sI https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.centos8.x86_64.rpm | head -n 1
+
+<img width="1175" height="42" alt="image" src="https://github.com/user-attachments/assets/a8c4b503-8ed2-4321-970d-843742c86f8d" />
+
+- Baixar o pacote RPM do wkhtmltopdf do GitHub - comando: wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.centos8.x86_64.rpm
+
+<img width="1040" height="36" alt="image" src="https://github.com/user-attachments/assets/5557195f-3647-44a0-83e3-8604a87e79e5" />
+
+- Instalar o pacote RPM baixado utilizando o gerenciador DNF - comando: sudo dnf install -y ./wkhtmltox-0.12.6-1.centos8.x86_64.rpm
+
+<img width="660" height="32" alt="image" src="https://github.com/user-attachments/assets/3753ee2c-eed8-4057-aa2f-7981424a0a4d" />
+
+- Verificar a versão do wkhtmltopdf  - comando: wkhtmltopdf --version
+- Confirmar o caminho do binário do wkhtmltopdf - comando: which wkhtmltopdf
+
+<img width="334" height="71" alt="image" src="https://github.com/user-attachments/assets/20e87095-93cd-4b88-b161-2da99add9ba4" />
+
